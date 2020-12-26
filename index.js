@@ -1,5 +1,5 @@
 const axios = require('axios');
-
+let config = {}
 function connectShimli(url, json){
     return new Promise((resolve, reject) => {
         const data = JSON.stringify(json);
@@ -21,15 +21,15 @@ function connectShimli(url, json){
         .catch(function (error) {
             resolve({
                 error: true,
-                txt: error
+                message: error
             })
         });
     })
 }
 
-module.export = {
-    config: {},
-    sendMessage: (type, body, to, instance, caption = null, lat = null, lng = null) => {
+module.exports = {
+    config: config,
+    sendMessage: (type, body, to, instance, caption = null, filename = null,lat = null, lng = null) => {
         return new Promise(async (resolve, reject) => {
             if(!config.token){
                 resolve({

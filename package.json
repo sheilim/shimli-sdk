@@ -1,6 +1,6 @@
 {
-  "name": "shimli-sdk",
-  "version": "1.0.0",
+  "name": "@sheilim/shimli-sdk",
+  "version": "1.0.1",
   "description": "SDK for Shimli",
   "main": "index.js",
   "dependencies": {
