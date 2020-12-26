@@ -2,6 +2,8 @@
 
 Use of the Shimli api to send and read messages from the channels available in Shimli (WhatsApp, SMS, Telegram, Facebook Messanger and Instagram)
 
+Link: <https://www.shimli.app>
+
 # Installation
 
 `npm i @sheilim/shimli-sdk --save`
