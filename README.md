@@ -15,7 +15,7 @@ const shimli = require('@sheilim/shimli-sdk);
 
 (function(){
     shimli.config['token'] = "YOUR_TOKEN";
-    const result = shimli.sendMessage("chat", "Hi!! 👋", "14243962506", "ID_INSTANCE");
+    const result = await shimli.sendMessage("chat", "Hi!! 👋", "14243962506", "ID_INSTANCE");
     if(result.error)
         console.log(result.message);
     else
