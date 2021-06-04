@@ -83,6 +83,30 @@ module.exports = {
             resolve(result);
         })
     },
+    sendWhBusinessApi: (type, body, to, instance, caption = null) => {
+        return new Promise(async (resolve, reject) => {
+            if(!config.token){
+                resolve({
+                    error: true,
+                    txt: 'Configurate Token'
+                })
+            }
+            let data_ = {
+                "token": config.token,
+                "type": type, 
+                "body": body, 
+                "to": to,
+                "instance": instance
+            };
+            if(caption)
+                data_['caption'] = caption;
+            const result = await connectShimli(
+                'https://api.shimli.app/v1/whatsapp-api',
+                data_
+            );
+            resolve(result);
+        })
+    },
     leadInsert: (to, instance, text, channel = 'whatsapp', area = null, agent = null, process = null, tags = null) => {
         return new Promise(async (resolve, reject) => {
             if(!config.token){

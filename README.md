@@ -56,6 +56,28 @@ const shimli = require('@sheilim/shimli-sdk');
 * *instance* - _string_ Id of the instance connected to Shimli
 * *caption* - _string_ (optional) Image or video caption
 
+## Send WhatsApp Business API
+
+```
+const shimli = require('@sheilim/shimli-sdk');
+
+(function(){
+    shimli.config['token'] = "YOUR_TOKEN";
+    const result = await sendWhBusinessApi.sendFbMessenger("text", "Hi!! 👋", "14243962506", "ID_INSTANCE");
+    if(result.error)
+        console.log(result.message);
+    else
+        console.log(result);
+})();
+```
+
+## Options sendWhBusinessApi
+* *type* - _string_ I could be text, image, video, audio, document
+* *body* - _string_ Message text or url of the media file to send
+* *to* - _string_ WhatsApp number to which the message will be sent
+* *instance* - _string_ Id of the instance connected to Shimli
+* *caption* - _string_ (optional) Image or video caption
+
 ## Add Lead to Shimli
 
 ```
