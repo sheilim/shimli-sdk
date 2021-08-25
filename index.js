@@ -29,110 +29,90 @@ function connectShimli(url, json){
 
 module.exports = {
     config: config,
-    sendWhatsApp: (type, body, to, instance, caption = null, filename = null,lat = null, lng = null) => {
+    sendWhatsApp: (message) => {
         return new Promise(async (resolve, reject) => {
             if(!config.token){
-                resolve({
+                return resolve({
                     error: true,
                     txt: 'Configurate Token'
                 })
             }
-            let data_ = {
-                "token": config.token,
-                "type": type, 
-                "body": body, 
-                "to": to,
-                "instance": instance
-            };
-            if(caption)
-                data_['caption'] = caption;
-            if(filename)
-                data_['filename'] = filename;
-            if(lat)
-                data_['lat'] = lat;
-            if(lng)
-                data_['lng'] = lng;
+            message['token'] = config.token;
+            if(message.type == 'location'){
+                if(!message.lat || !message.lng){
+                    return resolve({error: true, txt: 'It is necessary to send the latitude and longitude variables'});
+                }
+            }
+            if(message.type == 'buttons'){
+                if(!message.buttons){
+                    return resolve({error: true, txt: 'The buttons variable is required'});
+                }
+                if(message.buttons.length == 0){
+                    return resolve({error: true, txt: 'The buttons variable is required'});
+                }
+                if(message.buttons.length > 3){
+                    return resolve({error: true, txt: 'Only a maximum of 3 items is allowed for buttons'});
+                }
+                if(!message.title || !message.footer){
+                    return resolve({error: true, txt: 'You need to send the title and footer variables'});
+                }
+            }
+            if(message.type == 'lists'){
+                if(!message.sections || !message.title || !message.action){
+                    return resolve({error: true, txt: 'You need to send the section, title and action variables'});
+                }
+            }
             const result = await connectShimli(
                 'https://api.shimli.app/v1/msg-wh',
-                data_
+                message
             );
             resolve(result);
         })
     },
-    sendFbMessenger: (type, body, to, instance, caption = null) => {
+    sendFbMessenger: (message) => {
         return new Promise(async (resolve, reject) => {
             if(!config.token){
-                resolve({
+                return resolve({
                     error: true,
                     txt: 'Configurate Token'
                 })
             }
-            let data_ = {
-                "token": config.token,
-                "type": type, 
-                "body": body, 
-                "to": to,
-                "instance": instance
-            };
-            if(caption)
-                data_['caption'] = caption;
+            message['token'] = config.token;
             const result = await connectShimli(
                 'https://api.shimli.app/v1/facebook/send-messenger',
-                data_
+                message
             );
             resolve(result);
         })
     },
-    sendWhBusinessApi: (type, body, to, instance, caption = null) => {
+    sendWhBusinessApi: (message) => {
         return new Promise(async (resolve, reject) => {
             if(!config.token){
-                resolve({
+                return resolve({
                     error: true,
                     txt: 'Configurate Token'
                 })
             }
-            let data_ = {
-                "token": config.token,
-                "type": type, 
-                "body": body, 
-                "to": to,
-                "instance": instance
-            };
-            if(caption)
-                data_['caption'] = caption;
+            message['token'] = config.token;
             const result = await connectShimli(
                 'https://api.shimli.app/v1/whatsapp-api',
-                data_
+                message
             );
             resolve(result);
         })
     },
-    leadInsert: (to, instance, text, channel = 'whatsapp', area = null, agent = null, process = null, tags = null) => {
+    leadInsert: (lead) => {
         return new Promise(async (resolve, reject) => {
             if(!config.token){
-                resolve({
+                return resolve({
                     error: true,
                     txt: 'Configurate Token'
                 })
             }
-            let data_ = {
-                "token": config.token,
-                "to": to,
-                "instance": instance,
-                "text": text,
-                "channel": channel
-            };
-            if(area)
-                data_['area'] = area;
-            if(agent)
-                data_['agent'] = agent;
-            if(process)
-                data_['process'] = process;
-            if(tags)
-                data_['tags'] = tags;
+            lead['token'] = config.token;
             const result = await connectShimli(
                 'https://api.shimli.app/v1/crm',
-                data_
+                lead
             );
             resolve(result);
         })

@@ -1,7 +1,7 @@
 {
   "name": "@sheilim/shimli-sdk",
-  "version": "1.0.5",
-  "description": "API for sending WhatsApp, CRM, chatbot and more channels such as Facebook Messenger, Instagram and Telegram",
+  "version": "1.0.6",
+  "description": "API for sending WhatsApp, CRM, chatbot and more channels such as Facebook Messenger and Telegram",
   "main": "index.js",
   "dependencies": {
     "axios": "^0.21.1"

@@ -16,7 +16,12 @@ const shimli = require('@sheilim/shimli-sdk');
 
 (function(){
     shimli.config['token'] = "YOUR_TOKEN";
-    const result = await shimli.sendWhatsApp("chat", "Hi!! 👋", "14243962506", "ID_INSTANCE");
+    const result = await shimli.sendWhatsApp({
+        "type": "chat", 
+        "body": "Hi!! 👋", 
+        "to": "14243962506", 
+        "instance": "ID_INSTANCE"
+    });
     if(result.error)
         console.log(result.message);
     else
@@ -25,7 +30,7 @@ const shimli = require('@sheilim/shimli-sdk');
 ```
 
 ## Options sendWhatsApp
-* *type* - _string_ I could be chat, image, video, audio, location, document, sticker, gif
+* *type* - _string_ I could be chat, image, video, audio, location, document, sticker, gif, buttons, lists
 * *body* - _string_ Message text or url of the media file to send
 * *to* - _string_ WhatsApp number to which the message will be sent
 * *instance* - _string_ Id of the instance connected to Shimli
@@ -41,7 +46,12 @@ const shimli = require('@sheilim/shimli-sdk');
 
 (function(){
     shimli.config['token'] = "YOUR_TOKEN";
-    const result = await shimli.sendFbMessenger("text", "Hi!! 👋", "PSID", "ID_INSTANCE");
+    const result = await shimli.sendFbMessenger({
+        "type": "text", 
+        "body": "Hi!! 👋", 
+        "to": "PSID",
+        "instance": "ID_INSTANCE"
+    });
     if(result.error)
         console.log(result.message);
     else
@@ -63,7 +73,12 @@ const shimli = require('@sheilim/shimli-sdk');
 
 (function(){
     shimli.config['token'] = "YOUR_TOKEN";
-    const result = await sendWhBusinessApi.sendFbMessenger("text", "Hi!! 👋", "14243962506", "ID_INSTANCE");
+    const result = await sendWhBusinessApi.sendFbMessenger({
+        "type": "text", 
+        "body": "Hi!! 👋", 
+        "to": "14243962506", 
+        "instance": "ID_INSTANCE"
+    });
     if(result.error)
         console.log(result.message);
     else
@@ -85,7 +100,11 @@ const shimli = require('@sheilim/shimli-sdk');
 
 (function(){
     shimli.config['token'] = "YOUR_TOKEN";
-    const result = await shimli.leadInsert("ID_CLIENT", "ID_INSTANCE", "Insert Lead! 👋", "whatsapp");
+    const result = await shimli.leadInsert({
+        to: "ID_CLIENT", 
+        instance: "ID_INSTANCE", 
+        text: "Insert Lead! 👋", channel: "whatsapp"
+    });
     if(result.error)
         console.log(result.message);
     else
