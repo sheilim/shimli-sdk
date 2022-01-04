@@ -50,12 +50,6 @@ module.exports = {
                 if(message.buttons.length == 0){
                     return resolve({error: true, txt: 'The buttons variable is required'});
                 }
-                if(message.buttons.length > 3){
-                    return resolve({error: true, txt: 'Only a maximum of 3 items is allowed for buttons'});
-                }
-                if(!message.title || !message.footer){
-                    return resolve({error: true, txt: 'You need to send the title and footer variables'});
-                }
             }
             if(message.type == 'lists'){
                 if(!message.sections || !message.title || !message.action){
